@@ -9,6 +9,7 @@ import com.player.music.repository.AlbumRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.io.IOException;
 import java.util.Map;
@@ -21,11 +22,10 @@ public class AlbumService {
 
     private final Cloudinary cloudinary;
 
+    @PostMapping
     public Album addAlbum(AlbumRequest albumRequest) throws IOException {
 
-        Map<String, Object> imageParameter = ObjectUtils.asMap(
-                "resource_type", "image"
-        );
+        Map<String, Object> imageParameter = ObjectUtils.asMap("resource_type", "image");
 
         Map<String, Object> imageUploadRequest = cloudinary.uploader().upload(albumRequest.getCoverImage().getBytes(), imageParameter);
 
