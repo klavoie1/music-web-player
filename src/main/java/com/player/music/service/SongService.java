@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.Map;
+ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +26,7 @@ public class SongService {
         Map<String, Object> imageParameter = ObjectUtils.asMap("resource_type", "image");
 
         Map<String, Object> audioUploadResponse = cloudinary.uploader().upload(songRequest.getAudioFile().getBytes(), songParameter);
-        Map<String, Object> imageUploadResponse = cloudinary.uploader().upload(songRequest.getAudioFile().getBytes(), imageParameter);
+        Map<String, Object> imageUploadResponse = cloudinary.uploader().upload(songRequest.getCoverFile().getBytes(), imageParameter);
 
         Double durationInSeconds = (Double)audioUploadResponse.get("duration");
 
