@@ -27,5 +27,7 @@ public class Song {
 
     private String songDuration;
 
+    private String songImage;
+
     private String songFile;
 }
