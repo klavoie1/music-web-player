@@ -8,6 +8,7 @@ import com.player.music.dto.AlbumRequest;
 import com.player.music.repository.AlbumRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -44,6 +45,7 @@ public class AlbumService {
         return new AlbumListResponse(true, albumRepository.findAll());
     }
 
+    @DeleteMapping
     public Boolean deleteAlbum(String id) {
         Album selectedAlbum = albumRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Album Id not found"));
