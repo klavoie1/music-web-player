@@ -3,10 +3,13 @@ package com.player.music.service;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.player.music.document.Song;
+import com.player.music.dto.SongListResponse;
 import com.player.music.dto.SongRequest;
 import com.player.music.repository.SongRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.io.IOException;
  import java.util.Map;
@@ -42,6 +45,17 @@ public class SongService {
                 .build();
 
         return  songRepository.save(newSong);
+    }
+
+    @GetMapping
+    public SongListResponse getAllSongs() { return new SongListResponse(true, songRepository.findAll()); }
+
+    @DeleteMapping
+    public Boolean deleteSong(String id) {
+        Song selectedSong = songRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Song not found"));
+        songRepository.delete(selectedSong);
+        return true;
     }
 
     /**
